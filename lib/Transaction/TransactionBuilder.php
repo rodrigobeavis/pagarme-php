@@ -5,6 +5,7 @@ namespace PagarMe\Sdk\Transaction;
 trait TransactionBuilder
 {
     use \PagarMe\Sdk\SplitRule\SplitRuleBuilder;
+    use \PagarMe\Sdk\Customer\CustomerBuilder;
 
     /**
      * @param array transactionData
@@ -15,6 +16,14 @@ trait TransactionBuilder
         if (isset($transactionData->split_rules)) {
             $transactionData->split_rules = $this->buildSplitRules(
                 $transactionData->split_rules
+            );
+        }
+
+        if (isset($transactionData->customer)) {
+            //var_dump($this->buildCustomer($transactionData->customer));
+
+            $transactionData->customer = $this->buildCustomer(
+                $transactionData->customer
             );
         }
 

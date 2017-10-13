@@ -60,7 +60,6 @@ class TransactionHandler extends AbstractHandler
         $transaction = new CreditCardTransaction($transactionData);
         $request = new CreditCardTransactionCreate($transaction);
         $response = $this->client->send($request);
-
         return $this->buildTransaction($response);
     }
 
@@ -107,7 +106,6 @@ class TransactionHandler extends AbstractHandler
         $request = new TransactionGet($transactionId);
 
         $response = $this->client->send($request);
-
         return $this->buildTransaction($response);
     }
 
