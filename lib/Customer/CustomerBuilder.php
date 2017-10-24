@@ -25,7 +25,6 @@ trait CustomerBuilder
                 $customerData->date_created
             );
         }
-        var_dump(get_object_vars($customerData));
 
         return new Customer(get_object_vars($customerData));
     }

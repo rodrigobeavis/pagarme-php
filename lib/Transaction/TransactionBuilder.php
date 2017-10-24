@@ -20,10 +20,8 @@ trait TransactionBuilder
         }
 
         if (isset($transactionData->customer)) {
-            //var_dump($this->buildCustomer($transactionData->customer));
-
             $transactionData->customer = $this->buildCustomer(
-                $transactionData->customer
+                (object) $transactionData->customer
             );
         }
 
