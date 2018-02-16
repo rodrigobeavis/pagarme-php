@@ -376,7 +376,11 @@ class TransactionContext extends BasicContext
                 rand(5000, 10000),
                 $this->customer,
                 self::POSTBACK_URL,
-                $this->metadata
+                $this->metadata,
+                [
+                    'async' => false,
+                    'soft_descriptor' => "Minha Loja"
+                ]
             );
     }
 
@@ -535,5 +539,32 @@ class TransactionContext extends BasicContext
     {
         $transactionCustomer = $this->transaction->getCustomer();
         assertEquals($transactionCustomer->id, $this->customer->getId());
+    }
+
+    /**
+     * @When make boleto transaction with soft_descriptor
+     */
+    public function makeABoletoTransactionWithSoftDescriptor()
+    {
+        $this->transaction = self::getPagarMe()
+            ->transaction()
+            ->boletoTransaction(
+                1000,
+                $this->customer,
+                self::POSTBACK_URL,
+                null,
+                [
+                    'async' => false,
+                    'soft_descriptor' => "Minha Loja"
+                ]
+            );
+    }
+
+    /**
+     * @Then must contain same soft_descriptor
+     */
+    public function mustContainSameSoftDescriptor()
+    {
+        assertEquals("Minha Loja", $this->transaction->getSoftDescriptor());
     }
 }

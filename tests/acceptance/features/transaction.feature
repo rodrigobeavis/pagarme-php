@@ -166,3 +166,8 @@ Feature: Transaction
     Given an existent customer
     When make a boleto transaction with random amount and metadata
     Then the transaction customer must be the same retrieved
+
+  Scenario: Create a Boleto Transaction with soft_descriptor
+    Given a valid customer
+    When make boleto transaction with soft_descriptor
+    And must contain same soft_descriptor
